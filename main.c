@@ -37,32 +37,32 @@ int	main(void)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	double a; 
 	double b;
-	double xs;
-	double ys = -1;
+	double x;
+	double y = -1;
 	int iteration;
 	int max_iteration =100;
 
-	while(++ys < 800)
+	while(++y < 800)
 	{
-		xs = -1;
-		while(++xs < 800)
+		x = -1;
+		while(++x < 800)
 		{
 			iteration = 0;
 			double xtemp ;
-			double x =0; 
-			double y =0;
-			b = map(ys, 0, 800, -2, 2);
-			a = map(xs, 0,800, -2, 2);
-			while(((x*x) + (y*y) <= 4) && (++iteration < max_iteration))
+			double z =0; 
+			double z1 =0;
+			b = map(y, 0, 800, -2, 2);
+			a = map(x, 0,800, -2, 2);
+			while(((z*z) + (z1*z1) <= 4) && (++iteration < max_iteration))
 			{
-				xtemp = ((x*x) - (y*y)) + a;
-				y = (2* x * y) - b;
-				x = xtemp;
+				xtemp = ((z*z) - (z1*z1)) + a;
+				z1 = (2* z * z1) - b;
+				z = xtemp;
 			}
 		if (iteration == max_iteration)
-			my_mlx_pixel_put(&img, xs ,ys , 0x000000000);
+			my_mlx_pixel_put(&img, x ,y , 0x000000000);
 		else
-			my_mlx_pixel_put(&img, xs ,ys , 0xFFFFFFF);
+			my_mlx_pixel_put(&img, x ,y , 0xFFFFFFF);
 		}
 	}
 	mlx_put_image_to_window(mlx,win,img.img,0,0);
