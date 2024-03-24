@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 01:17:27 by saharchi          #+#    #+#             */
-/*   Updated: 2024/03/24 02:08:36 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/03/24 02:21:36 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void ft_mandelbrod(double y, double x, t_data *img)
 		z = xtemp;
 	}
 	if (iteration == max_iteration)
-		my_mlx_pixel_put(img, x ,y ,iteration * 0xFFF00cF<<16);
+		my_mlx_pixel_put(img, x ,y ,iteration * 0xFF00FF<<16);
 	else
-		my_mlx_pixel_put(img, x ,y ,iteration * 0xFAF00FF);
+		my_mlx_pixel_put(img, x ,y ,iteration * 0xffFfff0);
 }
 
 void ft_julia(double y, double x, t_data *img)
@@ -61,7 +61,7 @@ void ft_julia(double y, double x, t_data *img)
 		z = xtemp;
 	}
 	if (iteration == max_iteration)
-		my_mlx_pixel_put(img, x ,y ,iteration * 0x00000ff<<16);
+		my_mlx_pixel_put(img, x ,y ,iteration * 0x00000ff << 16);
 	else
-		my_mlx_pixel_put(img, x ,y ,iteration * 0xff00000);
+		my_mlx_pixel_put(img, x ,y ,iteration * 0xffFFFF0);
 }
