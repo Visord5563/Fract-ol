@@ -1,6 +1,6 @@
 NAME = main
 
-SRC = main.c
+SRC = main.c mandelbrod.c
 
 OBJ = $(SRC:.c=.o)
 

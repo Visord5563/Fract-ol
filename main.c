@@ -1,15 +1,13 @@
-#include <mlx.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "header.h"
 
-typedef struct	s_data 
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}		t_data;	
+// typedef struct	s_data 
+// {
+// 	void	*img;
+// 	char	*addr;
+// 	int		bits_per_pixel;
+// 	int		line_length;
+// 	int		endian;
+// }		t_data;	
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -19,10 +17,10 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-double map(double x, double in_min, double in_max, double out_min, double out_max) 
-{
-  return ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
-}
+// double map(double x, double in_min, double in_max, double out_min, double out_max) 
+// {
+//   return ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
+// }
 
 
 int	main(void)
@@ -35,34 +33,36 @@ int	main(void)
 	win = mlx_new_window(mlx,800,800,"fract-ol");
 	img.img = mlx_new_image(mlx,800,800);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	double a; 
-	double b;
+	// double a = 0.835; 
+	// double b = 0.2321;
 	double x;
 	double y = -1;
-	int iteration;
-	int max_iteration =100;
+	// int iteration;
+	// int max_iteration =100;
 
 	while(++y < 800)
 	{
 		x = -1;
 		while(++x < 800)
 		{
-			iteration = 0;
-			double xtemp ;
-			double z =0; 
-			double z1 =0;
-			b = map(y, 0, 800, -2, 2);
-			a = map(x, 0,800, -2, 2);
-			while(((z*z) + (z1*z1) <= 4) && (++iteration < max_iteration))
-			{
-				xtemp = ((z*z) - (z1*z1)) + a;
-				z1 = (2* z * z1) - b;
-				z = xtemp;
-			}
-		if (iteration == max_iteration)
-			my_mlx_pixel_put(&img, x ,y , 0x000000000);
-		else
-			my_mlx_pixel_put(&img, x ,y , 0xFFFFFFF);
+			// iteration = 0;
+			// double xtemp ;
+			// double z =0; 
+			// double z1 =0;
+			// z1 = map(y, 0, 800, -2, 2);
+			// z = map(x, 0,800, -2, 2);
+			// while(((z*z) + (z1*z1) <= 4) && (++iteration < max_iteration))
+			// {
+			// 	xtemp = ((z*z) - (z1*z1)) - a;
+			// 	z1 = (2* z * z1) - b ;
+			// 	z = xtemp;
+			// }
+			// if (iteration == max_iteration)
+			// 	my_mlx_pixel_put(&img, x ,y ,iteration * 0xFFF00cF<<16);
+			// else
+			// 	my_mlx_pixel_put(&img, x ,y ,iteration * 0xFAF00FF);
+			// ft_mandelbrod(y, x, &img);
+			ft_julia(y, x, &img);
 		}
 	}
 	mlx_put_image_to_window(mlx,win,img.img,0,0);
