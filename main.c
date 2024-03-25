@@ -1,14 +1,5 @@
 #include "header.h"
 
-// typedef struct	s_data 
-// {
-// 	void	*img;
-// 	char	*addr;
-// 	int		bits_per_pixel;
-// 	int		line_length;
-// 	int		endian;
-// }		t_data;	
-
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -17,41 +8,47 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-// double map(double x, double in_min, double in_max, double out_min, double out_max) 
-// {
-//   return ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
-// }
-
-
-int	main(int ac, char **av)
+void ml___x(t_data *img)
 {
-	void	*mlx;
-	void 	*win;
-	t_data	img;
+	img->mlx = mlx_init();
+	img->win = mlx_new_window(img->mlx,800,800,"fract-ol");
+	img->img = mlx_new_image(img->mlx,800,800);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
+}
 
-	(void)ac;
-	mlx = mlx_init();
-	win = mlx_new_window(mlx,800,800,"fract-ol");
-	img.img = mlx_new_image(mlx,800,800);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	// double a = 0.835; 
-	// double b = 0.2321;
+void handel_pixl(t_data *img, char **av)
+{
 	double x;
 	double y = -1;
-	// int iteration;
-	// int max_iteration =100;
+	int i = strlen(av[1]);
 
 	while(++y < 800)
 	{
 		x = -1;
 		while(++x < 800)
 		{
-			if(av[1][0] == '1')
-				ft_mandelbrod(y, x, &img);
+			if(i == 10 && strcmp(av[1], "mandeldrod") == 0)
+				ft_mandelbrod(y, x, img);
+			else if(i == 5 && strcmp(av[1], "julia") == 0)
+					ft_julia(y, x, img);
 			else
-				ft_julia(y, x, &img);
+			{
+				write(1, "uncorect name", 13);
+				exit(0);
+			}
 		}
 	}
-	mlx_put_image_to_window(mlx,win,img.img,0,0);
-	mlx_loop(mlx);
+}
+
+int	main(int ac, char **av)
+{
+	t_data	img;
+
+	if(ac != 2)
+		return (1);
+	ml___x(&img);
+	handel_pixl(&img, av);
+	// mlx_mouse_hook(img.win, key_hook, &img);
+	mlx_put_image_to_window(img.mlx,img.win,img.img,0,0);
+	mlx_loop(img.mlx);
 }

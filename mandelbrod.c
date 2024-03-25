@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 01:17:27 by saharchi          #+#    #+#             */
-/*   Updated: 2024/03/24 02:21:36 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/03/25 03:31:59 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,50 +18,61 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
   return ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
 }
 
+// int	key_hook(int keycode, t_data *img)
+// {
+// 	if(keycode == 5)
+// 		img->zoom *= 0.1;
+// 	else if(keycode == 4)
+// 		img->zoom *= 1.1;
+// 	return(0);
+// }
+
 void ft_mandelbrod(double y, double x, t_data *img)
 {
-	int iteration = 0;
-	double xtemp ;
-	double z = 0; 
-	double z1 = 0;
-	int max_iteration =100;
-	double a = 0; 
-	double b = 0;
+	t_var var;
 	
-	b = map(y, 0, 800, -2, 2);
-	a = map(x, 0,800, -2, 2);
-	while(((z*z) + (z1*z1) <= 4) && (++iteration < max_iteration))
+	var.b = map(y, 0, 800, -2, 2) * img->zoom;
+	var.a = map(x, 0,800, -2, 2)* img->zoom;
+	var.z = 0;
+	var.z1 = 0;
+	var.iteration = 0;
+	img->zoom = 1;
+	while(((var.z * var.z) + (var.z1 * var.z1) <= 4) && (++var.iteration < 100))
 	{
-		xtemp = ((z*z) - (z1*z1)) + a;
-		z1 = (2* z * z1) + b ;
-		z = xtemp;
+		var.xtemp = ((var.z*var.z) - (var.z1*var.z1)) + var.a;
+		var.z1 = (2* var.z * var.z1) + var.b ;
+		var.z = var.xtemp;
 	}
-	if (iteration == max_iteration)
-		my_mlx_pixel_put(img, x ,y ,iteration * 0xFF00FF<<16);
+	if (var.iteration == 100)
+	{
+		var.color = map(var.z, var.z1, 255, 100, 255);
+		my_mlx_pixel_put(img, x ,y ,var.color);
+	}
 	else
-		my_mlx_pixel_put(img, x ,y ,iteration * 0xffFfff0);
+	{
+		var.color = map(200, 0, 20, 0, 155);
+		my_mlx_pixel_put(img, x ,y , var.iteration * var.color);
+	}
 }
 
 void ft_julia(double y, double x, t_data *img)
 {
-	int iteration = 0;
-	double xtemp ;
-	double z = 0; 
-	double z1 = 0;
-	int max_iteration =100;
-	double a = 0.835; 
-	double b = 0.2321;
+	t_var var;
 	
-	z1 = map(y, 0, 800, -2, 2);
-	z = map(x, 0,800, -2, 2);
-	while(((z*z) + (z1*z1) <= 4) && (++iteration < max_iteration))
+	var.a = 0.835;
+	var.b = 0.2321;
+	var.z1 = map(y, 0,800, -2, 2);
+	var.z = map(x, 0, 800, -2, 2);
+	var.iteration = 0;
+	
+	while(((var.z*var.z) + (var.z1*var.z1) <= 4) && (++var.iteration < 100))
 	{
-		xtemp = ((z*z) - (z1*z1)) - a;
-		z1 = (2* z * z1) - b ;
-		z = xtemp;
+		var.xtemp = ((var.z*var.z) - (var.z1*var.z1)) - var.a;
+		var.z1 = (2* var.z * var.z1) - var.b ;
+		var.z = var.xtemp;
 	}
-	if (iteration == max_iteration)
-		my_mlx_pixel_put(img, x ,y ,iteration * 0x00000ff << 16);
+	if (var.iteration == 100)
+		my_mlx_pixel_put(img, x ,y ,var.iteration * 0x00000ff << 16);
 	else
-		my_mlx_pixel_put(img, x ,y ,iteration * 0xffFFFF0);
+		my_mlx_pixel_put(img, x ,y ,var.iteration * 0xffFFFF0);
 }
