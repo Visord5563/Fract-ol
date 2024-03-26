@@ -1,6 +1,6 @@
 NAME = fractol
 
-SRC = main.c mandelbrod.c
+SRC = main.c put_win.c fractol.c
 
 OBJ = $(SRC:.c=.o)
 

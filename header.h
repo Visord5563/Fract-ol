@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 01:23:24 by saharchi          #+#    #+#             */
-/*   Updated: 2024/03/26 07:03:25 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:31:20 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,6 @@ typedef struct s_data
 	int		line_length;
 	int		endian;
 	int		flag;
-	// t_var	var;
-}		t_data;	
-typedef struct s_var
-{
 	int		iteration;
 	double	xtemp;
 	double	z;
@@ -45,24 +41,29 @@ typedef struct s_var
 	double	a;
 	double	b;
 	double	color;
-}		t_var;	
+}		t_data;	
 
-// # define KEYPRESS 02
-// # define BUTTONPRESS 04
-// # define DestroyNotify 17
-// # define KEYPRESSMASK 1L << 0
-// # define ButtonPressMask (1L<<2)
-// # define StructureNotifyMask (1L<<17)
+# define COLOR_RED    0xFF0000
+# define COLOR_GREEN  0x00FF00
+# define COLOR_BLUE   0x0000FF
+# define COLOR_WHITE  0xFFFFFF
+# define COLOR_BLACK  0x000000
+# define COLOR_YELLOW 0xFFFF00
+# define COLOR_CYAN   0x00FFFF
+# define COLOR_MAGENTA 0xFF00FF
+# define WIDTH 800
+# define HEIGHT 800
+# define MAX_ITERATION 100
 
-double	map(double x, double in_min, double in_max,
-			double out_min, double out_max);
-void	ft_mandelbrod(double y, double x, t_data *img);
-void	ft_julia(double y, double x, t_data *img);
+double	map(double x, double in_min, double in_max, double out_min);
+void	ft_fractol(double y, double x, t_data *img);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		mouse_hook(int keycode, int x, int y, t_data *img);
 void	ml___x(t_data *img);
 void	handel_pixl(t_data *img);
 int		f_exit(t_data *img);
 int		apply_keys(int key, t_data *img);
-
+int		color_fractal(int iteration);
+void	put_pixl(t_data *img, double x, double y);
+int		parssing(t_data *img, int ac, char **av);
 #endif
