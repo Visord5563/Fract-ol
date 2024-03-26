@@ -1,4 +1,4 @@
-NAME = main
+NAME = fractol
 
 SRC = main.c mandelbrod.c
 
