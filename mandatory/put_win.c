@@ -12,9 +12,9 @@
 
 #include "header.h"
 
-double	map(double x, double out_max, double out_min)
+double	map(double x, double out_max, double out_min, double j)
 {
-	return (x * (out_max - out_min) / HEIGHT + out_min);
+	return (x * (out_max - out_min) / j + out_min);
 }
 
 int	mouse_hook(int keycode, int x, int y, t_data *img)
@@ -58,15 +58,15 @@ void	ft_fractol(double y, double x, t_data *img)
 {
 	if (img->flag == 1)
 	{
-		img->b = map(y + img->y, 2, -2) * img->zoom;
-		img->a = map(x + img->x, 2, -2) * img->zoom;
+		img->b = map(y + img->y, 2, -2, HEIGHT) * img->zoom;
+		img->a = map(x + img->x, 2, -2, WIDTH) * img->zoom;
 		img->z = 0;
 		img->z1 = 0;
 	}
 	else if (img->flag == 2)
 	{
-		img->z1 = map(y + img->y, 2, -2) * img->zoom;
-		img->z = map(x + img->x, 2, -2) * img->zoom;
+		img->z1 = map(y + img->y, 2, -2, HEIGHT) * img->zoom;
+		img->z = map(x + img->x, 2, -2, WIDTH) * img->zoom;
 		img->b = img->julia_y;
 		img->a = img->julia_x;
 	}

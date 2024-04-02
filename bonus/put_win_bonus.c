@@ -6,15 +6,15 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 05:43:53 by saharchi          #+#    #+#             */
-/*   Updated: 2024/03/31 03:33:57 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/04/02 07:36:47 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header_bonus.h"
 
-double	map(double x, double out_max, double out_min)
+double	map(double x, double out_max, double out_min, double j)
 {
-	return ((x - 0) * (out_max - out_min) / WIDTH + out_min);
+	return (x * (out_max - out_min) / j + out_min);
 }
 
 int	mouse_hook(int keycode, int x, int y, t_data *img)
@@ -78,15 +78,15 @@ void	ft_fractol(t_data *img, double x, double y)
 {
 	if (img->flag == 1 || img->flag == 0)
 	{
-		img->b = map(y + img->y, img->y_max, img->y_min);
-		img->a = map(x + img->x, img->x_max, img->x_min);
+		img->b = map(y + img->y, img->y_max, img->y_min, HEIGHT);
+		img->a = map(x + img->x, img->x_max, img->x_min, WIDTH);
 		img->z = 0;
 		img->z1 = 0;
 	}
 	else if (img->flag == 2)
 	{
-		img->z1 = map(y + img->y, img->y_max, img->y_min);
-		img->z = map(x + img->x, img->x_max, img->x_min);
+		img->z1 = map(y + img->y, img->y_max, img->y_min, HEIGHT);
+		img->z = map(x + img->x, img->x_max, img->x_min, WIDTH);
 		img->b = img->julia_y;
 		img->a = img->julia_x;
 	}

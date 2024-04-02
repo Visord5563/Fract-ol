@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 07:57:39 by saharchi          #+#    #+#             */
-/*   Updated: 2024/03/31 01:01:09 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:18:23 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	color_fractal(int iteration)
 	}
 }
 
-int	parssing(t_data *img, int ac, char **av)
+void	parssing(t_data *img, int ac, char **av)
 {
 	if (ac == 2 && ft_sln(av[1]) == 11
 		&& ft_sncm(av[1], "BurningShip", 11) == 0)
@@ -82,6 +82,9 @@ int	parssing(t_data *img, int ac, char **av)
 	{
 		if (ac == 4)
 		{
+			if (-2 > ft_atof(av[2]) || ft_atof(av[2]) > 2
+				|| -2 > ft_atof(av[3]) || ft_atof(av[3]) > 2)
+				ft_error(0);
 			img->julia_x = ft_atof(av[2]);
 			img->julia_y = ft_atof(av[3]);
 		}
@@ -90,10 +93,5 @@ int	parssing(t_data *img, int ac, char **av)
 		img->flag = 2;
 	}
 	else
-	{
-		write(1, "2 arguments must be passed enter\n", 34);
-		write(1, "\t\"mandelbrot\" \nor\n \t\"julia\"\n", 29);
-		return (1);
-	}
-	return (0);
+		ft_error(1);
 }

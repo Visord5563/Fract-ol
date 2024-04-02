@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 06:51:43 by saharchi          #+#    #+#             */
-/*   Updated: 2024/03/31 01:55:41 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:19:02 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	ml___x(t_data *img)
 {
 	img->mlx = mlx_init();
-	img->win = mlx_new_window(img->mlx, 800, 800, "fract-ol");
-	img->img = mlx_new_image(img->mlx, 800, 800);
+	img->win = mlx_new_window(img->mlx, WIDTH, HEIGHT, "fract-ol");
+	img->img = mlx_new_image(img->mlx, WIDTH, HEIGHT);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 }
@@ -69,8 +69,7 @@ int	main(int ac, char **av)
 {
 	t_data	img;
 
-	if (parssing(&img, ac, av) == 1)
-		return (1);
+	parssing(&img, ac, av);
 	ml___x(&img);
 	in_im(&img);
 	mlx_hook(img.win, 02, (1L << 0), apply_keys, &img);

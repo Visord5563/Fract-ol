@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 04:46:38 by saharchi          #+#    #+#             */
-/*   Updated: 2024/03/30 05:21:21 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:51:21 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,16 @@ size_t	ft_sln(const char *s)
 	return (i);
 }
 
-void	ft_error(void)
+void	ft_error(int j)
 {
-	write(1, "error\n", 7);
+	if (j == 1)
+	{
+		write(1, "2 arguments must be passed enter", 33);
+		write(1, " or 4 arguments in julia\n", 26);
+		write(1, "\t\"mandelbrot\" \nor\n \t\"julia\"\n", 29);
+	}
+	else
+		write(1, "error\n", 7);
 	exit(1);
 }
 
@@ -45,7 +52,7 @@ int	ft_check(char *str)
 			i++;
 		}
 		if (j == 2 || str[0] == 46 || str[0] == '\0')
-			ft_error();
+			ft_error(0);
 		if (str[i] >= 58 || str[i] <= 47)
 			return (1);
 		i++;
@@ -89,11 +96,11 @@ double	ft_atof(char *str)
 	s = 1;
 	r = 0;
 	if (ft_check(str))
-		ft_error();
+		ft_error(0);
 	while (*str == 32 || (*str >= 9 && *str <= 13))
 		str++;
 	if (str[0] == '\0' || *str == '\0')
-		ft_error();
+		ft_error(0);
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')

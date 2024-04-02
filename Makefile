@@ -5,14 +5,15 @@ SRC = mandatory/main.c mandatory/put_win.c mandatory/fractol.c mandatory/ft_atof
 SRCB = bonus/main_bonus.c bonus/put_win_bonus.c bonus/fractol_bonus.c bonus/ft_atof_bonus.c
 
 OBJ = $(SRC:.c=.o)
+
 OBJB = $(SRCB:.c=.o)
 
 all : $(NAME)
 
-%.o: %.c bonus/header_bonus.h
+bonus/%.o: bonus/%.c bonus/header_bonus.h
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
-%.o: %.c mandatory/header.h
+mandatory/%.o: mandatory/%.c mandatory/header.h
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
 bonus: $(OBJB)

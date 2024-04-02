@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 01:23:24 by saharchi          #+#    #+#             */
-/*   Updated: 2024/03/31 02:59:30 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:54:21 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_data
 # define HEIGHT 800
 # define MAX_ITERATION 100
 
-double	map(double x, double out_max, double out_min);
+double	map(double x, double out_max, double out_min, double j);
 void	ft_fractol(double y, double x, t_data *img);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		mouse_hook(int keycode, int x, int y, t_data *img);
@@ -64,9 +64,11 @@ int		f_exit(t_data *img);
 int		apply_keys(int key, t_data *img);
 int		color_fractal(int iteration);
 void	put_pixl(t_data *img, double x, double y);
-int		parssing(t_data *img, int ac, char **av);
+void	parssing(t_data *img, int ac, char **av);
 size_t	ft_sln(const char *s);
 double	ft_atof(char *str);
 int		ft_sncm(const char *s1, const char *s2, size_t n);
+void	in_im(t_data *img);
+void	ft_error(int j);
 
 #endif
